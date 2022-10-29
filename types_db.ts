@@ -11,7 +11,6 @@ export interface Database {
         Tables: {
             disqualifications: {
                 Row: {
-                    id: number
                     user_id: string
                     hemoglobin: number | null
                     systolic_pressure: number | null
@@ -20,6 +19,7 @@ export interface Database {
                     date: string
                     notes: string | null
                     created_at: string
+                    id: number
                 }
                 Insert: {
                     user_id: string
@@ -30,6 +30,7 @@ export interface Database {
                     date: string
                     notes?: string | null
                     created_at?: string
+                    id?: number
                 }
                 Update: {
                     user_id?: string
@@ -40,12 +41,13 @@ export interface Database {
                     date?: string
                     notes?: string | null
                     created_at?: string
+                    id?: number
                 }
             }
             donations: {
                 Row: {
-                    id: number
                     user_id: string
+                    id: number
                     hemoglobin: number | null
                     systolic_pressure: number | null
                     diastolic_pressure: number | null
@@ -57,6 +59,7 @@ export interface Database {
                 }
                 Insert: {
                     user_id: string
+                    id?: number
                     hemoglobin?: number | null
                     systolic_pressure?: number | null
                     diastolic_pressure?: number | null
@@ -68,6 +71,7 @@ export interface Database {
                 }
                 Update: {
                     user_id?: string
+                    id?: number
                     hemoglobin?: number | null
                     systolic_pressure?: number | null
                     diastolic_pressure?: number | null
@@ -97,7 +101,10 @@ export interface Database {
             [_ in never]: never
         }
         Functions: {
-            [_ in never]: never
+            get_donation_stats: {
+                Args: { uid: string }
+                Returns: Record<string, number>
+            }
         }
         Enums: {
             donation_kind:

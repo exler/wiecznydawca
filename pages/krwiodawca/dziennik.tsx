@@ -23,7 +23,7 @@ export default function DziennikPage() {
         }
 
         fetchData().catch(console.error);
-    })
+    }, [user])
 
     return (
         <>

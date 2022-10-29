@@ -5,7 +5,7 @@ import { Donation, DonationKind } from "types";
 import { useUserContext } from "@/utils/user-context";
 
 export default function DonationForm() {
-    const [formState, setFormState] = useState<Donation>({} as Donation);
+    const [formState, setFormState] = useState<Donation>({ kind: DonationKind.BLOOD } as Donation);
     const { user } = useUserContext();
     const router = useRouter();
 

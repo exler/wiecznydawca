@@ -29,3 +29,14 @@ export const getDisqualifications = async (user_id: string) => {
 
     return data
 }
+
+export const getDonationStats = async (user_id: string) => {
+    const { data, error } = await supabase.rpc('get_donation_stats', { uid: user_id })
+
+    if (error) {
+        console.log(error)
+        return null
+    }
+
+    return data
+}
