@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.4.1",
+    "@supabase/auth-helpers-react": "^0.3.0",
     "@supabase/supabase-js": "^2.0.0",
     "daisyui": "^2.31.0",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-merge-refs": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "18.11.0",

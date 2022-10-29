@@ -1,20 +1,13 @@
-import { Session } from "@supabase/supabase-js"
+import { useUserContext } from "@/utils/user-context"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { Disqualification } from "types"
 import { supabase } from "../../utils/supabase"
 
-interface DisqualificationFormState {
-    date: string,
-    for_days: number,
-    hemoglobin: number,
-    systolic_pressure: number,
-    diastolic_pressure: number,
-    notes: string
-}
-
-export default function DisqualificationForm({ session }: { session: Session }) {
-    const [formState, setFormState] = useState<DisqualificationFormState>({} as DisqualificationFormState)
-    const router = useRouter()
+export default function DisqualificationForm() {
+    const [formState, setFormState] = useState<Disqualification>({} as Disqualification);
+    const { user } = useUserContext();
+    const router = useRouter();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormState({ ...formState, [event.target.name]: event.target.value });
@@ -24,8 +17,8 @@ export default function DisqualificationForm({ session }: { session: Session }) 
         event.preventDefault()
 
         try {
-            const { data, error } = await supabase.from('donations').insert({
-                user_id: session.user.id,
+            const { data, error } = await supabase.from('disqualifications').insert({
+                user_id: user!.id,
                 for_days: formState.for_days,
                 date: formState.date,
                 hemoglobin: formState.hemoglobin,

@@ -1,32 +1,24 @@
-import { Session } from "@supabase/supabase-js"
 import { useRouter } from 'next/router'
 import { useState } from "react";
 import { supabase } from "../../utils/supabase"
+import { Donation, DonationKind } from "types";
+import { useUserContext } from "@/utils/user-context";
 
-interface DonationFormState {
-    date: string,
-    kind: number,
-    hemoglobin: number,
-    systolic_pressure: number,
-    diastolic_pressure: number,
-    volume: number,
-    notes: string
-}
-
-export default function DonationForm({ session }: { session: Session }) {
-    const [formState, setFormState] = useState<DonationFormState>({} as DonationFormState)
-    const router = useRouter()
+export default function DonationForm() {
+    const [formState, setFormState] = useState<Donation>({} as Donation);
+    const { user } = useUserContext();
+    const router = useRouter();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormState({ ...formState, [event.target.name]: event.target.value });
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+        event.preventDefault();
 
         try {
             const { data, error } = await supabase.from('donations').insert({
-                user_id: session.user.id,
+                user_id: user!.id,
                 kind: formState.kind,
                 date: formState.date,
                 hemoglobin: formState.hemoglobin,
@@ -34,7 +26,7 @@ export default function DonationForm({ session }: { session: Session }) {
                 diastolic_pressure: formState.diastolic_pressure,
                 volume: formState.volume,
                 notes: formState.notes,
-            })
+            });
 
             if (error) {
                 throw error;
@@ -45,7 +37,7 @@ export default function DonationForm({ session }: { session: Session }) {
             }
         } catch (error) {
             if (error instanceof Error) {
-                alert(error.message)
+                alert(error.message);
             }
             console.error(error);
         }
@@ -59,8 +51,12 @@ export default function DonationForm({ session }: { session: Session }) {
                         <span className="label-text">Rodzaj donacji</span>
                     </label>
                     <select name="kind" onChange={handleInputChange} className="select select-bordered w-full max-w-xs">
-                        <option value="1">Krew pełna</option>
-                        <option value="2">Osocze</option>
+                        <option value={DonationKind.BLOOD}>Krew pełna</option>
+                        <option value={DonationKind.PLASMA}>Osocze</option>
+                        <option value={DonationKind.PLATELETS}>Płytki krwi</option>
+                        <option value={DonationKind.RED_CELLS}>Krwinki czerwone</option>
+                        <option value={DonationKind.WHITE_CELLS}>Krwinki białe</option>
+                        <option value={DonationKind.PLASMA_PLATELETS}>Osocze i płytki</option>
                     </select>
                 </div>
                 <div className="form-control">

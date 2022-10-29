@@ -1,37 +1,24 @@
 import '../styles/globals.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { AppProps } from 'next/app'
-import Navbar from '../components/Navbar'
-import { Session } from '@supabase/supabase-js'
-import { supabase } from '../utils/supabase'
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { Database } from '../types_db'
+import { UserContextProvider } from '../utils/user-context'
+import Layout from '@/components/Layout';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const [session, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    async function getInitialSession() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-
-      if (session) {
-        setSession(session)
-      }
-    }
-
-    getInitialSession()
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  })
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>())
 
   return (
     <>
-      <Navbar session={session} />
-      <Component {...pageProps} session={session} />
+      <SessionContextProvider supabaseClient={supabaseClient}>
+        <UserContextProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </UserContextProvider>
+      </SessionContextProvider>
     </>
   )
 }
-
-export default MyApp

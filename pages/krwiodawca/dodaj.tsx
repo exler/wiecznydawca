@@ -1,22 +1,21 @@
-import { Session } from "@supabase/supabase-js"
 import { useState } from "react"
-import DisqualificationForm from "../components/forms/DisqualificationForm"
-import DonationForm from "../components/forms/DonationForm"
+import DisqualificationForm from "../../components/forms/DisqualificationForm"
+import DonationForm from "../../components/forms/DonationForm"
 
 enum JournalKind {
     DONATION = 1,
     DISQUALIFICATION,
 }
 
-export default function AddPage({ session }: { session: Session }) {
+export default function AddPage() {
     const [chosenJournalKind, setChosenJournalKind] = useState<JournalKind | null>(null)
 
     const renderForm = () => {
         if (chosenJournalKind == JournalKind.DONATION) {
-            return <DonationForm session={session} />
+            return <DonationForm />
         }
         else if (chosenJournalKind == JournalKind.DISQUALIFICATION) {
-            return <DisqualificationForm session={session} />
+            return <DisqualificationForm />
         }
 
         return null
