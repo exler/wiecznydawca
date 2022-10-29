@@ -11,7 +11,7 @@ export default function Layout({ children }: Props) {
     return (
         <>
             <Head>
-                <title>Everdonor</title>
+                <title>Wieczny Dawca</title>
                 <meta name="robots" content="follow, index" />
             </Head>
             <Navbar />

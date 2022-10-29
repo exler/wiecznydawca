@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image';
 import { useUserContext } from '@/utils/user-context';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
@@ -11,7 +12,7 @@ export default function Navbar() {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <Link href={!user ? '/' : '/krwiodawca'}><a className="btn btn-ghost normal-case text-xl">Everdonor</a></Link>
+                <Link href={!user ? '/' : '/krwiodawca'}><a><Image src="/logo.png" alt="Wieczny Dawca" width={128} height={42} /></a></Link>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
