@@ -103,7 +103,7 @@ export interface Database {
         Functions: {
             get_donation_stats: {
                 Args: { uid: string }
-                Returns: Record<string, number>
+                Returns: { kind: Database["public"]["Enums"]["donation_kind"], total_volume: number }
             }
         }
         Enums: {

@@ -3,7 +3,7 @@ import { useUserContext } from "@/utils/user-context";
 import { useEffect, useState } from "react"
 
 export default function PulpitPage() {
-    const [donationStats, setDonationStats] = useState<Record<string, number>[] | null>(null);
+    const [donationStats, setDonationStats] = useState<{ kind: string, total_volume: number }[] | null>(null);
     const { user } = useUserContext();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function PulpitPage() {
             {!donationStats ? <div>Loading...</div> : (
                 <>
                     {donationStats.map((stats, index) => (
-                        <div key={index}>Oddano {stats['total_volume']}ml {stats['kind']}</div>
+                        <div key={index}>Oddano {stats.total_volume}ml {stats.kind}</div>
                     ))
                     }
                 </>
