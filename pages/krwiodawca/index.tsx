@@ -22,7 +22,7 @@ export default function PulpitPage() {
 
     return (
         <div>
-            {!donationStats ? <div>Loading...</div> : (
+            {!donationStats ? <div>Wczytywanie statystyk...</div> : (
                 <>
                     {donationStats.map((stats, index) => (
                         <div key={index}>Oddano {stats.total_volume}ml {stats.kind}</div>

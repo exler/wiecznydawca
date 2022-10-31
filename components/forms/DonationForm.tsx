@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router'
 import { useState } from "react";
-import { supabase } from "../../utils/supabase"
 import { Donation, DonationKind } from "types";
 import { useUserContext } from "@/utils/user-context";
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function DonationForm() {
     const [formState, setFormState] = useState<Donation>({ kind: DonationKind.BLOOD } as Donation);
     const { user } = useUserContext();
     const router = useRouter();
+    const supabaseClient = useSupabaseClient();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormState({ ...formState, [event.target.name]: event.target.value });
@@ -17,7 +18,7 @@ export default function DonationForm() {
         event.preventDefault();
 
         try {
-            const { data, error } = await supabase.from('donations').insert({
+            const { data, error } = await supabaseClient.from('donations').insert({
                 user_id: user!.id,
                 kind: formState.kind,
                 date: formState.date,

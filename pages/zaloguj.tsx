@@ -56,7 +56,7 @@ export default function ZalogujPage() {
                             className="btn btn-primary"
                             loading={loading}
                             disabled={!email.length}>
-                            {loading ? 'Loading' : 'Wyślij link do zalogowania'}
+                            {loading ? 'Wysyłanie...' : 'Wyślij link do zalogowania'}
                         </FormButton>
                     </div>
                 </form>

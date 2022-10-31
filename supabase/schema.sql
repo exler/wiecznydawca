@@ -9,7 +9,7 @@ CREATE TABLE users (
 );
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Can view own user data." ON users FOR SELECT USING (auth.uid() = id);
-CREATE POLICY "Can update own user data." ON users FOR SELECT USING (auth.uid() = id);
+CREATE POLICY "Can update own user data." ON users FOR UPDATE USING (auth.uid() = id);
 
 /**
 * This trigger automatically creates a user entry when a new user signs up via Supabase Auth.

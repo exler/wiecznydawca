@@ -20,7 +20,7 @@ const FormButton = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
             style={{ ...style }}
             {...other}
         >
-            {!loading ? children : 'Loading...'}
+            {!loading ? children : 'Proszę czekać...'}
         </Component>
     )
 });
