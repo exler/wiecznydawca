@@ -5,11 +5,13 @@ import { Disqualification, Donation } from "types";
 import { useUserContext } from "@/utils/user-context";
 import DonationForm from "@/components/forms/DonationForm";
 import DisqualificationForm from "@/components/forms/DisqualificationForm";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function DziennikPage() {
     const [chosenToUpdate, setChosenToUpdate] = useState<Donation | Disqualification | null>(null);
     const [events, setEvents] = useState<(Donation | Disqualification)[]>([]);
     const { user } = useUserContext();
+    const supabaseClient = useSupabaseClient();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,6 +37,16 @@ export default function DziennikPage() {
         else {
             return <DisqualificationForm disqualification_id={chosenToUpdate!.id} />
         }
+    }
+
+    const deleteEvent = async (event: Donation | Disqualification) => {
+        const table_name = 'kind' in event ? 'donations' : 'disqualifications';
+        const { error } = await supabaseClient.from(table_name).delete().eq('id', event.id);
+
+        if (error)
+            console.error(error);
+
+        setEvents(events.filter(e => e.id !== event.id));
     }
 
     return (
@@ -66,6 +78,7 @@ export default function DziennikPage() {
                                             </>
                                         )}
                                         <button onClick={() => setChosenToUpdate(event)}>Zmień</button>
+                                        <button onClick={() => deleteEvent(event)}>Usuń</button>
                                     </div>
                                 ))
                             )}
