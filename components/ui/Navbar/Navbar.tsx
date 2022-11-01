@@ -23,10 +23,10 @@ export default function Navbar() {
                             </>
                         ) : (
                             <>
-                                <li><Link href="/krwiodawca/dodaj"><a className="btn btn-primary">Dodaj</a></Link></li>
-                                <li><Link href="/krwiodawca/dziennik"><a>Dziennik</a></Link></li>
-                                <li><Link href="/krwiodawca/odznaki"><a>Odznaki</a></Link></li>
-                                <li><Link href="/krwiodawca/ustawienia"><a>Ustawienia</a></Link></li>
+                                <li className="mr-2"><Link href="/krwiodawca/dodaj"><a className="btn btn-primary">Dodaj</a></Link></li>
+                                <li className="mr-2"><Link href="/krwiodawca/dziennik"><a>Dziennik</a></Link></li>
+                                <li className="mr-2"><Link href="/krwiodawca/odznaki"><a>Odznaki</a></Link></li>
+                                <li className="mr-2"><Link href="/krwiodawca/ustawienia"><a>Ustawienia</a></Link></li>
                                 <li><button onClick={async () => {
                                     await supabaseClient.auth.signOut();
                                     router.push("/zaloguj");

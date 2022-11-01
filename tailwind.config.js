@@ -15,9 +15,9 @@ module.exports = {
     themes: [
       {
         donor: {
-          "primary": "#FF0000",
-          "secondary": "#D926A9",
-          "accent": "#1FB2A6",
+          "primary": "#DF245B",
+          "secondary": "#E74A78",
+          "accent": "#D926A9",
           "neutral": "#191D24",
           "base-100": "#2A303C",
           "info": "#3ABFF8",

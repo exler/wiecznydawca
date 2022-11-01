@@ -15,7 +15,9 @@ export default function Layout({ children }: Props) {
                 <meta name="robots" content="follow, index" />
             </Head>
             <Navbar />
-            <main>{children}</main>
+            <main className="container mx-auto w-full">
+                {children}
+            </main>
         </>
     );
 }

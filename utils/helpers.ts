@@ -40,3 +40,29 @@ export const formatDate = (date: string) => {
     const d = new Date(date)
     return `${d.getFullYear()}-${("0" + (d.getMonth() + 1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}`
 }
+
+export const formatAmount = (ml: number) => {
+    if (ml < 1000)
+        return `${ml} mL`
+    else
+        return `${Math.round(ml / 10) / 100} L`
+}
+
+export const getDonationKindName = (kind: string) => {
+    switch (kind) {
+        case DonationKind.BLOOD:
+            return 'Krew pełna';
+        case DonationKind.PLASMA:
+            return 'Osocze';
+        case DonationKind.PLATELETS:
+            return 'Płytki krwi';
+        case DonationKind.RED_CELLS:
+            return 'Czerwone krwinki';
+        case DonationKind.WHITE_CELLS:
+            return 'Białe krwinki';
+        case DonationKind.PLASMA_PLATELETS:
+            return 'Osocze i płytki krwi';
+        default:
+            return '?';
+    }
+}
