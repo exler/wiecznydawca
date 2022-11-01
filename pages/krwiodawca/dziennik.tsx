@@ -2,7 +2,7 @@ import { getDisqualifications, getDonations } from "@/utils/api";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Disqualification, Donation } from "types";
-import { useUserContext } from "@/utils/user-context";
+import { useUser } from "@/utils/user-context";
 import DonationForm from "@/components/forms/DonationForm";
 import DisqualificationForm from "@/components/forms/DisqualificationForm";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -11,7 +11,7 @@ import { formatAmount, formatDate, getDonationKindName } from "@/utils/helpers";
 export default function DziennikPage() {
     const [chosenToUpdate, setChosenToUpdate] = useState<Donation | Disqualification | null>(null);
     const [events, setEvents] = useState<(Donation | Disqualification)[]>([]);
-    const { user } = useUserContext();
+    const { user } = useUser();
     const supabaseClient = useSupabaseClient();
 
     useEffect(() => {

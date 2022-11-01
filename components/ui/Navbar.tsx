@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image';
-import { useUserContext } from '@/utils/user-context';
+import { useUser } from '@/utils/user-context';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import logo from '@/public/logo.png';
@@ -8,7 +8,7 @@ import logo from '@/public/logo.png';
 export default function Navbar() {
     const router = useRouter();
     const supabaseClient = useSupabaseClient();
-    const { user } = useUserContext();
+    const { user } = useUser();
 
     return (
         <div className="navbar bg-base-100">

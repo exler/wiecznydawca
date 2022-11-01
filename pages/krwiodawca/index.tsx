@@ -1,13 +1,13 @@
 import { getDonationStats, getLatestDonationDate } from "@/utils/api";
 import { calculateBloodDonated, formatAmount, getDonationKindName } from "@/utils/helpers";
-import { useUserContext } from "@/utils/user-context";
+import { useUser } from "@/utils/user-context";
 import { useEffect, useState } from "react";
 
 export default function PulpitPage() {
     const [donationStats, setDonationStats] = useState<{ kind: string, total_volume: number }[] | null>(null);
     const [totalDonated, setTotalDonated] = useState<number>(0);
     const [latestDonationDate, setLatestDonationDate] = useState<string | null>(null);
-    const { user } = useUserContext();
+    const { user } = useUser();
 
     useEffect(() => {
         const fetchData = async () => {

@@ -1,5 +1,5 @@
 import { formatDate } from "@/utils/helpers";
-import { useUserContext } from "@/utils/user-context"
+import { useUser } from "@/utils/user-context"
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
@@ -7,7 +7,7 @@ import { Disqualification } from "types"
 
 export default function DisqualificationForm({ disqualification_id }: { disqualification_id?: number }) {
     const [formState, setFormState] = useState<Disqualification>({} as Disqualification);
-    const { user } = useUserContext();
+    const { user } = useUser();
     const router = useRouter();
     const supabaseClient = useSupabaseClient();
 

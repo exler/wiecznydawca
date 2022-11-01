@@ -1,5 +1,5 @@
 import { getDonationStats } from "@/utils/api";
-import { useUserContext } from "@/utils/user-context";
+import { useUser } from "@/utils/user-context";
 import { calculateBloodDonated, formatAmount } from "@/utils/helpers";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import zasluzony_zdrowia_narodu from "@/public/odznaki/zasluzony_zdrowia_narodu.
 
 export default function OdznakiPage() {
     const [totalDonated, setTotalDonated] = useState<number>(0);
-    const { user } = useUserContext();
+    const { user } = useUser();
 
     useEffect(() => {
         const fetchData = async () => {

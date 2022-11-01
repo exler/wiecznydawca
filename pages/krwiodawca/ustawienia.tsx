@@ -1,11 +1,11 @@
 import FormButton from "@/components/ui/FormButton";
 import Input from "@/components/ui/Input";
-import { useUserContext } from "@/utils/user-context";
+import { useUser } from "@/utils/user-context";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FormEvent, useEffect, useState } from "react";
 
 export default function UstawieniaPage() {
-    const userContext = useUserContext();
+    const userContext = useUser();
     const supabaseClient = useSupabaseClient();
 
     const [loading, setLoading] = useState(false)

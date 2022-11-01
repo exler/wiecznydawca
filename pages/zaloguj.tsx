@@ -1,7 +1,7 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react"
-import { useUserContext } from "@/utils/user-context";
+import { useUser } from "@/utils/user-context";
 import Input from "@/components/ui/Input";
 import FormButton from "@/components/ui/FormButton";
 
@@ -14,7 +14,7 @@ export default function ZalogujPage() {
     });
 
     const router = useRouter();
-    const userContext = useUserContext();
+    const userContext = useUser();
     const supabaseClient = useSupabaseClient();
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
