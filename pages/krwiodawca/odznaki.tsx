@@ -4,6 +4,11 @@ import { calculateBloodDonated, formatAmount } from "@/utils/helpers";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
+import honorowy_1 from "@/public/odznaki/honorowy_I.png";
+import honorowy_2 from "@/public/odznaki/honorowy_II.png";
+import honorowy_3 from "@/public/odznaki/honorowy_III.png";
+import zasluzony_zdrowia_narodu from "@/public/odznaki/zasluzony_zdrowia_narodu.png";
+
 
 export default function OdznakiPage() {
     const [totalDonated, setTotalDonated] = useState<number>(0);
@@ -40,7 +45,7 @@ export default function OdznakiPage() {
             <div className="flex flex-row">
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
-                        <Image src="/odznaki/honorowy_I.png" alt="" width={90} height={128} />
+                        <Image src={honorowy_1} alt="" height={128} />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Zasłużony Honorowy Dawca Krwi</h2>
@@ -51,7 +56,7 @@ export default function OdznakiPage() {
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
-                        <Image src="/odznaki/honorowy_II.png" alt="" width={90} height={128} />
+                        <Image src={honorowy_2} alt="" height={128} />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Zasłużony Honorowy Dawca Krwi</h2>
@@ -62,7 +67,7 @@ export default function OdznakiPage() {
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
-                        <Image src="/odznaki/honorowy_III.png" alt="" width={90} height={128} />
+                        <Image src={honorowy_3} alt="" height={128} />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Zasłużony Honorowy Dawca Krwi</h2>
@@ -73,7 +78,7 @@ export default function OdznakiPage() {
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
-                        <Image src="/odznaki/zasluzony_zdrowia_narodu.png" alt="" width={128} height={128} />
+                        <Image src={zasluzony_zdrowia_narodu} alt="" height={128} />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Honorowy Dawca Krwi</h2>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import hero_image from "@/public/hero_healthcare.png";
 
 export default function IndexPage() {
   return (
@@ -13,7 +14,7 @@ export default function IndexPage() {
                   <div className="absolute top-0 rounded-full bg-primary -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
                   <div className="absolute rounded-full bg-secondary -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
                   <div className="relative">
-                    <Image className="object-cover object-center mx-auto rounded-lg shadow-2xl" alt="" src="/hero_healthcare.svg" width={888} height={618} />
+                    <Image className="object-cover object-center mx-auto" alt="" src={hero_image} />
                   </div>
                 </div>
               </div>
@@ -35,14 +36,12 @@ export default function IndexPage() {
                     <dd className="flex-grow">
                       <h2 className="mb-3 text-lg font-medium tracking-tighter text-neutral-600">Dostępny wszędzie</h2>
                       <p className="text-base leading-relaxed text-gray-400">Możliwości dziennika donacji z poziomu każdej platformy</p>
-                      <Link href="#funkcjonalnosc">
-                        <a className="inline-flex items-center mt-6 font-semibold text-primary md:mb-2 lg:mb-0 hover:text-neutral-600" title="Czytaj dalej">
-                          Czytaj dalej
-                          <svg className="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path fill="none" d="M0 0h24v24H0z"></path>
-                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
-                          </svg>
-                        </a>
+                      <Link href="#funkcjonalnosc" className="inline-flex items-center mt-6 font-semibold text-primary md:mb-2 lg:mb-0 hover:text-neutral-600" title="Czytaj dalej">
+                        Czytaj dalej
+                        <svg className="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                        </svg>
                       </Link>
                     </dd>
                   </div>
@@ -55,14 +54,12 @@ export default function IndexPage() {
                     <dd className="flex-grow">
                       <h2 className="mb-3 text-lg font-medium tracking-tighter text-neutral-600">Jednokrokowa rejestracja</h2>
                       <p className="text-base leading-relaxed text-gray-400">Do założenia konta wystarczy email - bez potrzeby hasła!</p>
-                      <Link href="/zaloguj">
-                        <a className="inline-flex items-center mt-6 font-semibold text-primary md:mb-2 lg:mb-0 hover:text-neutral-600" title="Załóż konto">
-                          Załóż konto
-                          <svg className="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path fill="none" d="M0 0h24v24H0z"></path>
-                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
-                          </svg>
-                        </a>
+                      <Link href="/zaloguj" className="inline-flex items-center mt-6 font-semibold text-primary md:mb-2 lg:mb-0 hover:text-neutral-600" title="Załóż konto">
+                        Załóż konto
+                        <svg className="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                        </svg>
                       </Link>
                     </dd>
                   </div>
