@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import Navbar from './ui/Navbar';
+import Footer from './ui/Footer';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -18,6 +19,7 @@ export default function Layout({ children }: Props) {
             <main className="container mx-auto w-full">
                 {children}
             </main>
+            <Footer />
         </>
     );
 }
