@@ -50,7 +50,7 @@ export default function DisqualificationForm({ disqualification_id }: { disquali
                 throw error;
             }
             else {
-                router.push('/dziennik')
+                router.push('/krwiodawca/dziennik')
             }
         } catch (error) {
             if (error instanceof Error) {

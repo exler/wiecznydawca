@@ -21,7 +21,7 @@ export default function DziennikPage() {
 
             if (donations && disqualifications) {
                 let ets = [...donations, ...disqualifications];
-                ets.sort((a, b) => (a.created_at > b.created_at) ? 1 : ((b.created_at > a.created_at) ? -1 : 0));
+                ets.sort((a, b) => (a.created_at < b.created_at) ? 1 : ((b.created_at < a.created_at) ? -1 : 0));
                 setEvents(ets);
             } else {
                 throw new Error('Error fetching data');
@@ -90,6 +90,9 @@ export default function DziennikPage() {
                                                         <>Okres: {event.for_days} dni</>
                                                     )}
                                                 </p>
+                                                {event.hemoglobin && (
+                                                    <p className="text-sm">Hemoglobina: {event.hemoglobin.toFixed(1)}</p>
+                                                )}
                                             </div>
                                             <p></p>
                                             <div>

@@ -51,7 +51,7 @@ export default function DonationForm({ donation_id }: { donation_id?: number }) 
                 throw error;
             }
             else {
-                router.push('/dziennik')
+                router.push('/krwiodawca/dziennik')
             }
         } catch (error) {
             if (error instanceof Error) {

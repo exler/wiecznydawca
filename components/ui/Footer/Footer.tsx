@@ -7,7 +7,7 @@ export default function Footer() {
                     <span className="mt-2 text-sm font-light text-gray-500">
                         <>
                             Copyright © {new Date().getFullYear()}
-                            <a href="https://kamilmarut.com" className="mx-2" rel="noopener noreferrer">Kamil Marut</a>
+                            <a href="https://kamilmarut.com" className="mx-2 text-secondary hover:text-primary" rel="noopener noreferrer">Kamil Marut</a>
                         </>
                     </span>
                 </div>

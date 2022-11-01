@@ -1,6 +1,6 @@
 import { getDonationStats } from "@/utils/api";
 import { useUserContext } from "@/utils/user-context";
-import { calculateBloodDonated } from "@/utils/helpers";
+import { calculateBloodDonated, formatAmount } from "@/utils/helpers";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
@@ -27,7 +27,7 @@ export default function OdznakiPage() {
         if (goal <= totalDonated) {
             return 'Osiągnięto!'
         } else {
-            return `Pozostało: ${goal - totalDonated}ml`
+            return `Pozostało: ${formatAmount(goal - totalDonated)}`
         }
     }
 
