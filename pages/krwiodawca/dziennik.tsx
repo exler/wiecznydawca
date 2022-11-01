@@ -28,8 +28,9 @@ export default function DziennikPage() {
             }
         }
 
-        fetchData().catch(console.error);
-    }, [user])
+        if (user && !events.length)
+            fetchData().catch(console.error);
+    }, [events, user])
 
     const renderForm = () => {
         if ('kind' in chosenToUpdate!) {

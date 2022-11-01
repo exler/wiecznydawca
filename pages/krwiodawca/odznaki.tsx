@@ -25,8 +25,9 @@ export default function OdznakiPage() {
             }
         }
 
-        fetchData().catch(console.error);
-    }, [user])
+        if (user && !totalDonated)
+            fetchData().catch(console.error);
+    }, [totalDonated, user])
 
     const getAmountLeft = (goal: number) => {
         if (goal <= totalDonated) {

@@ -23,8 +23,9 @@ export default function PulpitPage() {
             }
         }
 
-        fetchData().catch(console.error);
-    }, [user])
+        if (user && !donationStats)
+            fetchData().catch(console.error);
+    }, [donationStats, user])
 
 
 
