@@ -2,7 +2,7 @@
     <img src="public/logo.png" width="168">
     <p align="center">Personal web journal/organizer of a blood donor.</p>
     <p align="center">
-      <img alt="MIT License" src="https://img.shields.io/github/license/exler/wiecznydawca?color=lightblue">
+      <img alt="MIT License" src="https://img.shields.io/github/license/exler/wiecznydawca?color=pink">
     </p>
 </p>
 
