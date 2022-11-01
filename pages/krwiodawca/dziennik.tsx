@@ -62,7 +62,7 @@ export default function DziennikPage() {
                     <>
                         {events && (
                             events.map((event, index) => (
-                                <div key={index} className="w-2/4 mx-auto mb-4 card card-side bg-base-100 shadow-xl">
+                                <div key={index} className="w-full lg:w-2/4 mx-auto mb-4 card card-side bg-base-100 shadow-xl">
                                     <figure>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16" className="ml-4 fill-primary">
                                             {'kind' in event ? (

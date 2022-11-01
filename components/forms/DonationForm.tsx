@@ -68,13 +68,13 @@ export default function DonationForm({ donation_id }: { donation_id?: number }) 
                     <label className="label">
                         <span className="label-text">Rodzaj donacji</span>
                     </label>
-                    <select name="kind" onChange={handleInputChange} className="select select-bordered w-full max-w-xs">
-                        <option value={DonationKind.BLOOD} selected={formState.kind == DonationKind.BLOOD}>Krew pełna</option>
-                        <option value={DonationKind.PLASMA} selected={formState.kind == DonationKind.PLASMA}>Osocze</option>
-                        <option value={DonationKind.PLATELETS} selected={formState.kind == DonationKind.PLATELETS}>Płytki krwi</option>
-                        <option value={DonationKind.RED_CELLS} selected={formState.kind == DonationKind.RED_CELLS}>Krwinki czerwone</option>
-                        <option value={DonationKind.WHITE_CELLS} selected={formState.kind == DonationKind.WHITE_CELLS}>Krwinki białe</option>
-                        <option value={DonationKind.PLASMA_PLATELETS} selected={formState.kind == DonationKind.PLASMA_PLATELETS}>Osocze i płytki</option>
+                    <select name="kind" value={formState.kind} onChange={handleInputChange} className="select select-bordered w-full max-w-xs">
+                        <option value={DonationKind.BLOOD}>Krew pełna</option>
+                        <option value={DonationKind.PLASMA}>Osocze</option>
+                        <option value={DonationKind.PLATELETS}>Płytki krwi</option>
+                        <option value={DonationKind.RED_CELLS}>Krwinki czerwone</option>
+                        <option value={DonationKind.WHITE_CELLS}>Krwinki białe</option>
+                        <option value={DonationKind.PLASMA_PLATELETS}>Osocze i płytki</option>
                     </select>
                 </div>
                 <div className="form-control">

@@ -27,7 +27,7 @@ export default function IndexPage() {
               </p>
               <div className="flex-col mt-0 lg:mt-6 max-w-7xl sm:flex">
                 <dl className="grid grid-cols-1 gap-12 md:grid-cols-2">
-                  <div>
+                  <div className="text-center md:text-left">
                     <dt className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-primary rounded-full bg-red-50">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
@@ -45,8 +45,8 @@ export default function IndexPage() {
                       </Link>
                     </dd>
                   </div>
-                  <div>
-                    <dt className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-primary rounded-full bg-blue-50">
+                  <div className="text-center md:text-left">
+                    <dt className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-primary rounded-full bg-red-50">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                       </svg>

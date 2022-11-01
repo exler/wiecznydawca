@@ -43,7 +43,7 @@ export default function OdznakiPage() {
                 <title>Odznaki</title>
             </Head>
 
-            <div className="flex flex-row">
+            <div className="flex flex-col lg:flex-row">
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
                         <Image src={honorowy_1} alt="" height={128} />
