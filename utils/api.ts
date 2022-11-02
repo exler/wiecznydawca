@@ -1,7 +1,22 @@
 import { formatDate } from "./helpers";
-import { supabase } from "./supabase";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database } from "types_db";
 
-export const getDonations = async (user_id: string) => {
+export const getUserDetails = async (supabase: SupabaseClient<Database>) => {
+    const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .single();
+
+    if (error) {
+        console.error(error);
+        return null
+    }
+
+    return data
+}
+
+export const getDonations = async (supabase: SupabaseClient<Database>, user_id: string) => {
     const { data, error } = await supabase
         .from('donations')
         .select('*')
@@ -16,7 +31,7 @@ export const getDonations = async (user_id: string) => {
     return data
 }
 
-export const getDisqualifications = async (user_id: string) => {
+export const getDisqualifications = async (supabase: SupabaseClient<Database>, user_id: string) => {
     const { data, error } = await supabase
         .from('disqualifications')
         .select('*')
@@ -31,7 +46,7 @@ export const getDisqualifications = async (user_id: string) => {
     return data
 }
 
-export const getDonationStats = async (user_id: string) => {
+export const getDonationStats = async (supabase: SupabaseClient<Database>, user_id: string) => {
     const { data, error } = await supabase.rpc('get_donation_stats', { uid: user_id })
 
     if (error) {
@@ -42,7 +57,7 @@ export const getDonationStats = async (user_id: string) => {
     return data
 }
 
-export const getLatestDonationDate = async (user_id: string) => {
+export const getLatestDonationDate = async (supabase: SupabaseClient<Database>, user_id: string) => {
     const { data, error } = await supabase
         .from('donations')
         .select('date')

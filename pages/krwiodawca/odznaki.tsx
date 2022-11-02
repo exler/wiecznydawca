@@ -1,34 +1,38 @@
 import { getDonationStats } from "@/utils/api";
-import { useUser } from "@/utils/user-context";
 import { calculateBloodDonated, formatAmount } from "@/utils/helpers";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import honorowy_1 from "@/public/odznaki/honorowy_I.png";
 import honorowy_2 from "@/public/odznaki/honorowy_II.png";
 import honorowy_3 from "@/public/odznaki/honorowy_III.png";
 import zasluzony_zdrowia_narodu from "@/public/odznaki/zasluzony_zdrowia_narodu.png";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { GetServerSideProps } from "next";
 
+export const getServerSideProps: GetServerSideProps = withPageAuth({
+    async getServerSideProps(context, supabase) {
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
 
-export default function OdznakiPage() {
-    const [totalDonated, setTotalDonated] = useState<number>(0);
-    const { user } = useUser();
+        const stats = await getDonationStats(supabase, user!.id);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const stats = await getDonationStats(user!.id);
+        if (!stats)
+            throw new Error("Nie udało się pobrać danych");
 
-            if (stats) {
-                setTotalDonated(stats.reduce((acc, curr) => acc + calculateBloodDonated(curr.total_volume, curr.kind), 0));
-            } else {
-                throw new Error('Error fetching data');
+        return {
+            props: {
+                totalDonated: stats.reduce((acc, curr) => acc + calculateBloodDonated(curr.total_volume, curr.kind), 0),
             }
         }
+    }
+})
 
-        if (user && !totalDonated)
-            fetchData().catch(console.error);
-    }, [totalDonated, user])
+interface Props {
+    totalDonated: number;
+}
 
+export default function OdznakiPage({ totalDonated }: Props) {
     const getAmountLeft = (goal: number) => {
         if (goal <= totalDonated) {
             return 'Osiągnięto!'

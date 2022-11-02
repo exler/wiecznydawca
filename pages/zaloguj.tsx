@@ -1,7 +1,6 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react"
-import { useUser } from "@/utils/user-context";
 import Input from "@/components/ui/Input";
 import FormButton from "@/components/ui/FormButton";
 import { renderTailwindMessage } from "@/utils/helpers";
@@ -12,7 +11,7 @@ export default function ZalogujPage() {
     const [message, setMessage] = useState<{ type: string; content: string } | null>(null);
 
     const router = useRouter();
-    const userContext = useUser();
+    const user = useUser();
     const supabaseClient = useSupabaseClient();
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -32,13 +31,13 @@ export default function ZalogujPage() {
     }
 
     useEffect(() => {
-        if (userContext.user) {
+        if (user) {
             router.replace("/krwiodawca");
         }
-    }, [userContext, router]);
+    }, [user, router]);
 
 
-    if (!userContext.user)
+    if (!user)
         return (
             <>
                 <div className="mx-auto w-1/2 mb-4">

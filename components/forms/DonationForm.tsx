@@ -1,13 +1,12 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import { Donation, DonationKind } from "types";
-import { useUser } from "@/utils/user-context";
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import { formatDate } from '@/utils/helpers';
 
 export default function DonationForm({ donation_id }: { donation_id?: number }) {
     const [formState, setFormState] = useState<Donation>({ kind: DonationKind.BLOOD } as Donation);
-    const { user } = useUser();
+    const user = useUser();
     const router = useRouter();
     const supabaseClient = useSupabaseClient();
 

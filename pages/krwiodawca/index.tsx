@@ -1,34 +1,37 @@
 import { getDonationStats, getLatestDonationDate } from "@/utils/api";
 import { calculateBloodDonated, formatAmount, getDonationKindName } from "@/utils/helpers";
-import { useUser } from "@/utils/user-context";
-import { useEffect, useState } from "react";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { GetServerSideProps } from "next";
 
-export default function PulpitPage() {
-    const [donationStats, setDonationStats] = useState<{ kind: string, total_volume: number }[] | null>(null);
-    const [totalDonated, setTotalDonated] = useState<number>(0);
-    const [latestDonationDate, setLatestDonationDate] = useState<string | null>(null);
-    const { user } = useUser();
+export const getServerSideProps: GetServerSideProps = withPageAuth({
+    async getServerSideProps(context, supabase) {
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const stats = await getDonationStats(user!.id);
-            const latestDonation = await getLatestDonationDate(user!.id);
+        const stats = await getDonationStats(supabase, user!.id);
+        const latestDonation = await getLatestDonationDate(supabase, user!.id);
 
-            if (stats && latestDonation) {
-                setDonationStats(stats);
-                setTotalDonated(stats.reduce((acc, curr) => acc + calculateBloodDonated(curr.total_volume, curr.kind), 0));
-                setLatestDonationDate(latestDonation);
-            } else {
-                throw new Error('Error fetching data');
+        if (!stats)
+            throw new Error("Nie udało się pobrać danych");
+
+        return {
+            props: {
+                donationStats: stats,
+                totalDonated: stats.reduce((acc, curr) => acc + calculateBloodDonated(curr.total_volume, curr.kind), 0),
+                latestDonationDate: latestDonation,
             }
         }
+    }
+})
 
-        if (user && !donationStats)
-            fetchData().catch(console.error);
-    }, [donationStats, user])
+interface Props {
+    donationStats: { kind: string, total_volume: number }[];
+    totalDonated: number;
+    latestDonationDate: string | null;
+}
 
-
-
+export default function PulpitPage({ donationStats, totalDonated, latestDonationDate }: Props) {
     return (
         <>
             <div className="stats shadow flex flex-row justify-center w-full xl:w-1/2 mx-auto">
@@ -62,4 +65,3 @@ export default function PulpitPage() {
         </>
     )
 }
-

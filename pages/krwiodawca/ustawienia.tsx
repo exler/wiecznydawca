@@ -1,13 +1,39 @@
 import FormButton from "@/components/ui/FormButton";
 import Input from "@/components/ui/Input";
-import { useUser } from "@/utils/user-context";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { FormEvent, useEffect, useState } from "react";
 import { renderTailwindMessage } from "@/utils/helpers";
+import { GetServerSideProps } from "next";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { getUserDetails } from "@/utils/api";
+import { UserDetails } from "types";
 
-export default function UstawieniaPage() {
-    const userContext = useUser();
+export const getServerSideProps: GetServerSideProps = withPageAuth({
+    async getServerSideProps(context, supabase) {
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
+
+        const userDetails = await getUserDetails(supabase);
+
+        if (!userDetails)
+            throw new Error("Nie udało się pobrać danych");
+
+        return {
+            props: {
+                userDetails: userDetails
+            }
+        }
+    }
+})
+
+interface Props {
+    userDetails: UserDetails;
+}
+
+export default function UstawieniaPage({ userDetails }: Props) {
     const supabaseClient = useSupabaseClient();
+    const user = useUser();
 
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
@@ -15,12 +41,12 @@ export default function UstawieniaPage() {
     const [message, setMessage] = useState<{ type: string; content: string } | null>(null);
 
     useEffect(() => {
-        if (userContext.user)
-            setEmail(userContext.user.email || '');
+        if (user?.email)
+            setEmail(user.email);
 
-        if (userContext.userDetails)
-            setFullName(userContext.userDetails.full_name || '');
-    }, [userContext.user, userContext.userDetails])
+        if (userDetails)
+            setFullName(userDetails.full_name || '');
+    }, [user, userDetails])
 
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -29,14 +55,14 @@ export default function UstawieniaPage() {
         setLoading(true);
         setMessage(null);
 
-        if (email !== userContext.user?.email) {
+        if (email !== user?.email) {
             const { error } = await supabaseClient.auth.updateUser({ email });
             if (error)
                 setMessage({ type: 'error', content: error.message });
         }
 
-        if (fullName !== userContext.userDetails?.full_name) {
-            const { error } = await supabaseClient.from('users').update({ full_name: fullName }).eq('id', userContext.user?.id);
+        if (fullName !== userDetails?.full_name) {
+            const { error } = await supabaseClient.from('users').update({ full_name: fullName }).eq('id', user?.id);
             if (error)
                 setMessage({ type: 'error', content: error.message });
         }

@@ -1,36 +1,45 @@
 import { getDisqualifications, getDonations } from "@/utils/api";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Disqualification, Donation } from "types";
-import { useUser } from "@/utils/user-context";
 import DonationForm from "@/components/forms/DonationForm";
 import DisqualificationForm from "@/components/forms/DisqualificationForm";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { formatAmount, formatDate, getDonationKindName } from "@/utils/helpers";
+import { GetServerSideProps } from "next";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
-export default function DziennikPage() {
-    const [chosenToUpdate, setChosenToUpdate] = useState<Donation | Disqualification | null>(null);
-    const [events, setEvents] = useState<(Donation | Disqualification)[]>([]);
-    const { user } = useUser();
-    const supabaseClient = useSupabaseClient();
+export const getServerSideProps: GetServerSideProps = withPageAuth({
+    async getServerSideProps(context, supabase) {
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const donations = await getDonations(user!.id);
-            const disqualifications = await getDisqualifications(user!.id);
+        const donations = await getDonations(supabase, user!.id);
+        const disqualifications = await getDisqualifications(supabase, user!.id);
 
-            if (donations && disqualifications) {
-                let ets = [...donations, ...disqualifications];
-                ets.sort((a, b) => (a.created_at < b.created_at) ? 1 : ((b.created_at < a.created_at) ? -1 : 0));
-                setEvents(ets);
-            } else {
-                throw new Error('Error fetching data');
+        if (!donations || !disqualifications)
+            throw new Error("Nie udało się pobrać danych");
+
+        let ets = [...donations, ...disqualifications];
+        ets.sort((a, b) => (a.created_at < b.created_at) ? 1 : ((b.created_at < a.created_at) ? -1 : 0));
+
+        return {
+            props: {
+                events: ets
             }
         }
+    }
+})
 
-        if (user && !events.length)
-            fetchData().catch(console.error);
-    }, [events, user])
+interface Props {
+    events: (Donation | Disqualification)[]
+}
+
+export default function DziennikPage({ events }: Props) {
+    const [chosenToUpdate, setChosenToUpdate] = useState<Donation | Disqualification | null>(null);
+    const [eventsState, setEventsState] = useState<(Donation | Disqualification)[]>(events);
+    const supabaseClient = useSupabaseClient();
 
     const renderForm = () => {
         if ('kind' in chosenToUpdate!) {
@@ -48,7 +57,7 @@ export default function DziennikPage() {
         if (error)
             console.error(error);
 
-        setEvents(events.filter(e => e.id !== event.id));
+        setEventsState(events.filter(e => e.id !== event.id));
     }
 
     return (
@@ -60,8 +69,8 @@ export default function DziennikPage() {
             <div className="flex flex-col">
                 {!chosenToUpdate ? (
                     <>
-                        {events && (
-                            events.map((event, index) => (
+                        {eventsState && (
+                            eventsState.map((event, index) => (
                                 <div key={index} className="w-full lg:w-2/4 mx-auto mb-4 card card-side bg-base-100 shadow-xl">
                                     <figure>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16" className="ml-4 fill-primary">
