@@ -27,7 +27,7 @@ $ yarn dev
 
 * Start the production server
 ```
-$ yarn build && yarn start
+$ yarn prod
 ```
 
 ## License
