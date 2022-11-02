@@ -54,7 +54,7 @@ export default function PulpitPage({ donationStats, totalDonated, latestDonation
 
             <div className="mt-4 flex flex-col lg:flex-row align-center justify-center items-center">
                 {donationStats?.map((stats, index) => (
-                    <div key={index} className="card w-1/2 lg:w-1/5 bg-primary text-primary-content mb-2 mr-2">
+                    <div key={index} className="card w-1/2 lg:w-1/5 h-36 bg-primary text-primary-content mb-2 mr-2">
                         <div className="card-body">
                             <h6 className="card-title">{getDonationKindName(stats.kind)}</h6>
                             <h2>{formatAmount(stats.total_volume)}</h2>
