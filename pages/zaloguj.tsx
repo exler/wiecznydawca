@@ -4,14 +4,12 @@ import { FormEvent, useEffect, useState } from "react"
 import { useUser } from "@/utils/user-context";
 import Input from "@/components/ui/Input";
 import FormButton from "@/components/ui/FormButton";
+import { renderTailwindMessage } from "@/utils/helpers";
 
 export default function ZalogujPage() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
-    const [message, setMessage] = useState<{ type?: string; content?: string }>({
-        type: '',
-        content: '',
-    });
+    const [message, setMessage] = useState<{ type: string; content: string } | null>(null);
 
     const router = useRouter();
     const userContext = useUser();
@@ -21,7 +19,7 @@ export default function ZalogujPage() {
         e.preventDefault();
 
         setLoading(true);
-        setMessage({});
+        setMessage(null);
 
         const { error } = await supabaseClient.auth.signInWithOtp({ email });
         if (error) {
@@ -42,25 +40,30 @@ export default function ZalogujPage() {
 
     if (!userContext.user)
         return (
-            <div className="card w-full mx-auto max-w-sm bg-base-200">
-                <form onSubmit={handleLogin} className="card-body">
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                            <Input type="email" className="input input-bordered" placeholder="Email" value={email} onChange={setEmail} required />
-                        </label>
-                    </div>
-                    <div className="form-control mt-6">
-                        <FormButton
-                            type="submit"
-                            className="btn btn-primary"
-                            loading={loading}
-                            disabled={!email.length}>
-                            {loading ? 'Wysyłanie...' : 'Wyślij link do zalogowania'}
-                        </FormButton>
-                    </div>
-                </form>
-            </div>
+            <>
+                <div className="mx-auto w-1/2 mb-4">
+                    {message && renderTailwindMessage(message.type, message.content)}
+                </div>
+                <div className="card w-full mx-auto max-w-sm bg-base-200">
+                    <form onSubmit={handleLogin} className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                                <Input type="email" className="input input-bordered" placeholder="Email" value={email} onChange={setEmail} required />
+                            </label>
+                        </div>
+                        <div className="form-control mt-6">
+                            <FormButton
+                                type="submit"
+                                className="btn btn-primary"
+                                loading={loading}
+                                disabled={!email.length}>
+                                {loading ? 'Wysyłanie...' : 'Wyślij link do zalogowania'}
+                            </FormButton>
+                        </div>
+                    </form>
+                </div>
+            </>
         )
     else
         return <></>
