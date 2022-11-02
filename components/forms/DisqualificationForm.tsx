@@ -66,31 +66,31 @@ export default function DisqualificationForm({ disqualification_id }: { disquali
                     <label className="label">
                         <span className="label-text">Liczba dni</span>
                     </label>
-                    <input type="number" name="for_days" value={formState.for_days || ''} onChange={handleInputChange} className="input input-bordered" />
+                    <input type="number" name="for_days" value={formState.for_days || ''} onChange={handleInputChange} required className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Data dyskwalifikacji</span>
                     </label>
-                    <input type="date" name="date" value={formatDate(formState.date) || ''} onChange={handleInputChange} className="input input-bordered" />
+                    <input type="date" name="date" value={formatDate(formState.date) || ''} onChange={handleInputChange} required className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Hemoglobina</span>
                     </label>
-                    <input type="text" name="hemoglobin" value={formState.hemoglobin || ''} onChange={handleInputChange} className="input input-bordered" />
+                    <input type="number" step="0.1" name="hemoglobin" value={formState.hemoglobin || ''} onChange={handleInputChange} className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Ciśnienie krwi skurczowe</span>
                     </label>
-                    <input type="text" name="systolic_pressure" value={formState.systolic_pressure || ''} onChange={handleInputChange} className="input input-bordered" />
+                    <input type="number" name="systolic_pressure" value={formState.systolic_pressure || ''} onChange={handleInputChange} className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Ciśnienie krwi rozkurczowe</span>
                     </label>
-                    <input type="text" name="diastolic_pressure" value={formState.diastolic_pressure || ''} onChange={handleInputChange} className="input input-bordered" />
+                    <input type="number" name="diastolic_pressure" value={formState.diastolic_pressure || ''} onChange={handleInputChange} className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
