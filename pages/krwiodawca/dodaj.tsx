@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useState } from "react"
 import DisqualificationForm from "../../components/forms/DisqualificationForm"
 import DonationForm from "../../components/forms/DonationForm"
@@ -23,6 +24,9 @@ export default function AddPage() {
 
     return (
         <>
+            <Head>
+                <title>Nowy wpis | Wieczny Dawca</title>
+            </Head>
             {
                 !chosenJournalKind ? (
                     <div className="flex w-full flex-col lg:flex-row mx-auto justify-center items-center gap-y-4">

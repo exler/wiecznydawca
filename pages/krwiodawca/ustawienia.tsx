@@ -7,6 +7,7 @@ import { GetServerSideProps } from "next";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { getUserDetails } from "@/utils/api";
 import { UserDetails } from "types";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = withPageAuth({
     async getServerSideProps(context, supabase) {
@@ -74,9 +75,13 @@ export default function UstawieniaPage({ userDetails }: Props) {
     }
 
     return (
-        <><div className="mx-auto w-1/2 mb-4">
-            {message && renderTailwindMessage(message.type, message.content)}
-        </div>
+        <>
+            <Head>
+                <title>Ustawienia | Wieczny Dawca</title>
+            </Head>
+            <div className="mx-auto w-1/2 mb-4">
+                {message && renderTailwindMessage(message.type, message.content)}
+            </div>
             <div className="card w-full mx-auto max-w-sm bg-base-200">
                 <form onSubmit={handleSubmit} className="card-body">
                     <div className="form-control">

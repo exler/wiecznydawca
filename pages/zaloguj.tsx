@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react"
 import Input from "@/components/ui/Input";
 import FormButton from "@/components/ui/FormButton";
 import { renderTailwindMessage } from "@/utils/helpers";
+import Head from "next/head";
 
 export default function ZalogujPage() {
     const [loading, setLoading] = useState(false)
@@ -40,6 +41,9 @@ export default function ZalogujPage() {
     if (!user)
         return (
             <>
+                <Head>
+                    <title>Zaloguj się | Wieczny Dawca</title>
+                </Head>
                 <div className="mx-auto w-1/2 mb-4">
                     {message && renderTailwindMessage(message.type, message.content)}
                 </div>

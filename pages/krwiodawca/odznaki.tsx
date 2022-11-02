@@ -44,7 +44,7 @@ export default function OdznakiPage({ totalDonated }: Props) {
     return (
         <>
             <Head>
-                <title>Odznaki</title>
+                <title>Odznaki | Wieczny Dawca</title>
             </Head>
 
             <div className="flex flex-col lg:flex-row">

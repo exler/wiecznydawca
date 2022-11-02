@@ -63,7 +63,7 @@ export default function DziennikPage({ events }: Props) {
     return (
         <>
             <Head>
-                <title>Dziennik</title>
+                <title>Dziennik | Wieczny Dawca</title>
             </Head>
 
             <div className="flex flex-col">
