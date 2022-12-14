@@ -1,5 +1,5 @@
 {
-  "name": "everdonor",
+  "name": "wiecznydawca",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,10 +8,8 @@
     "lint": "next lint",
     "dev": "next dev",
     "prod": "next build && next start",
-    "cypress:open": "cypress open",
-    "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test prod http://localhost:3000 cypress:open",
-    "e2e:headless": "start-server-and-test prod http://localhost:3000 cypress:headless"
+    "playwright:test": "playwright test",
+    "test:e2e": "start-server-and-test prod http://localhost:3000 playwright:test"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.4.4",
@@ -24,17 +22,17 @@
     "sharp": "^0.31.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.28.1",
     "@types/node": "18.11.0",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.12",
-    "cypress": "^10.11.0",
+    "daisyui": "^2.31.0",
     "eslint": "8.25.0",
     "eslint-config-next": "13.0.1",
     "postcss": "^8.4.18",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.1.8",
-    "daisyui": "^2.31.0",
     "typescript": "4.8.4"
   }
 }
